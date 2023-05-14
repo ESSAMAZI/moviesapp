@@ -7,6 +7,9 @@ import 'package:movies_app/movies/data/model/movie_model.dart';
 abstract class BaseMovieRemoteDataSource {
   //نكتب فقط اسماء المهام المطلوبه
   Future<List<MovieModel>> getNowPlayingMovies();
+  Future<List<MovieModel>> getPopularMovies();
+
+  Future<List<MovieModel>> getTopRatedMovies();
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -28,6 +31,36 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
       //معالجة الاخطاء عن طريق اخذ بيانات الخطى الرجاع كامل عن طريق مودل
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(response.data));
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> getPopularMovies() async {
+    final response = await Dio().get(ApiConstance.popularMoviesPath);
+
+    if (response.statusCode == 200) {
+      return List<MovieModel>.from((response.data["results"] as List).map(
+        (e) => MovieModel.fromJson(e),
+      ));
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> getTopRatedMovies() async {
+    final response = await Dio().get(ApiConstance.topRatedMoviesPath);
+
+    if (response.statusCode == 200) {
+      return List<MovieModel>.from((response.data["results"] as List).map(
+        (e) => MovieModel.fromJson(e),
+      ));
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJson(response.data),
+      );
     }
   }
 }
