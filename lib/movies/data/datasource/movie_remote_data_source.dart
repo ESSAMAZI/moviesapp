@@ -31,6 +31,8 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
       //معالجة الاخطاء عن طريق اخذ بيانات الخطى الرجاع كامل عن طريق مودل
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJson(response.data));
+      //في حاله الخطى في قاعده بيانات محليه
+      // throw const LocalDatabaseException(message:'');
     }
   }
 
