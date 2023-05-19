@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/movies/presentation/controller/movies_bloc.dart';
+import 'package:movies_app/movies/presentation/controller/movies_event.dart';
+import 'package:movies_app/movies/presentation/controller/movies_state.dart';
 
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({super.key});
@@ -6,7 +10,19 @@ class MoviesScreen extends StatelessWidget {
   // List<Movie> movies = [];
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return BlocProvider(
+      create: (context) {
+        // اول ما تعمل انشاء لبلوك رح نادي على الحدث
+        return MoviesBloc()..add(GetNowPlayingMoviesEvent());
+      },
+      child: BlocBuilder<MoviesBloc, MoviesState>(
+        builder: (context, state) {
+          //الوصول الى الحاله
+          print(state);
+          return const Scaffold();
+        },
+      ),
+    );
   }
 }
 
