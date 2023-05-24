@@ -13,13 +13,15 @@ class MainMoviesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
+    //  print('build');
     return BlocProvider(
       //اضافة الاحداث البلوكٍ
       create: (context) => sl<MoviesBloc>()
         ..add(GetNowPlayingMoviesEvent())
         //
-        ..add(GetPopularMoviesEvent()),
+        ..add(GetPopularMoviesEvent())
+        //
+        ..add(GetTopRatedMoviesEvent()),
       child: Scaffold(
         body: SingleChildScrollView(
           key: const Key('movieScrollView'),
