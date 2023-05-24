@@ -15,7 +15,7 @@ class MoviesScreend extends StatelessWidget {
       create: (context) {
         // اول ما تعمل انشاء لبلوك رح نادي على الحدث
         //slنرسل بيانات الكائن الموجود في
-        return MoviesBloc(sl())..add(GetNowPlayingMoviesEvent());
+        return sl<MoviesBloc>()..add(GetNowPlayingMoviesEvent());
       },
       child: BlocBuilder<MoviesBloc, MoviesState>(
         builder: (context, state) {
