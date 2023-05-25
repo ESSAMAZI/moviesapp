@@ -16,8 +16,14 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
+      //تستخدم من اجل تحديد اعاده بناء العنصر  buildWhen
+      // Stateفي الطبيعي رح يتم اعاده بناء العنصر 3 الى اربع مرات حسب عدد
+      //وتحديد الحالات التي نريد فقط اعاده بناء العنصر بواسطتها buildWhenومع وجود
+      //(previous الحالة قبل, current  الحالة بعد)
+      buildWhen: (previous, current) =>
+          previous.nowPlayingState != current.nowPlayingState,
       builder: (context, state) {
-        print('BlocBuilder NowPlayingComponent');
+        // print('BlocBuilder NowPlayingComponent');
         switch (state.nowPlayingState) {
           case RequestState.loading:
             return const SizedBox(
