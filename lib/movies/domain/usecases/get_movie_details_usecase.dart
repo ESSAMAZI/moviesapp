@@ -17,7 +17,8 @@ class GetMovieDetailsUseCase
   @override
   Future<Either<Failure, MovieDetail>> call(
       MovieDetailsParameters parameters) async {
-    return await baseMoviesRepository.getMovieDetails();
+    //parameters يستقبل
+    return await baseMoviesRepository.getMovieDetails(parameters);
   }
 }
 

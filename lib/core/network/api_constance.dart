@@ -10,6 +10,9 @@ class ApiConstance {
   //
   static const String topRatedMoviesPath =
       "$baseUrl/movie/top_rated?api_key=$apiKey";
+  //داله
+  static String movieDetailsPath(int movieId) =>
+      "$baseUrl/movie/$movieId?api_key=$apiKey";
 
   //image
   static const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';

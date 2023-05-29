@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:movies_app/core/error/exceptions.dart';
 import 'package:movies_app/core/network/api_constance.dart';
 import 'package:movies_app/core/network/error_message_model.dart';
+import 'package:movies_app/movies/data/model/movie_detalis_model.dart';
 import 'package:movies_app/movies/data/model/movie_model.dart';
+import 'package:movies_app/movies/domain/usecases/get_movie_details_usecase.dart';
 
 abstract class BaseMovieRemoteDataSource {
   //نكتب فقط اسماء المهام المطلوبه
@@ -10,6 +12,8 @@ abstract class BaseMovieRemoteDataSource {
   Future<List<MovieModel>> getPopularMovies();
 
   Future<List<MovieModel>> getTopRatedMovies();
+
+  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameters);
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -24,6 +28,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
       //data["results"] التي التحتوي على البيانات التي نريدها
       //List من اجل نستقبلها ونلف على البيانات ونستقبلهاعلى شكل
       // هي تمثل كل بيانات عنصر راجع اليناe
+      //  aPI موجوده في البيانات results
       return List<MovieModel>.from((response.data["results"] as List).map(
         (e) => MovieModel.fromJson(e),
       ));
@@ -63,6 +68,19 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
       throw ServerException(
         errorMessageModel: ErrorMessageModel.fromJson(response.data),
       );
+    }
+  }
+
+  @override
+  Future<MovieDetailsModel> getMovieDetails(
+      MovieDetailsParameters parameters) async {
+    final response =
+        await Dio().get(ApiConstance.movieDetailsPath(parameters.movieId));
+    if (response.statusCode == 200) {
+      return MovieDetailsModel.fromJson(response.data);
+    } else {
+      throw ServerException(
+          errorMessageModel: ErrorMessageModel.fromJson(response.data));
     }
   }
 }

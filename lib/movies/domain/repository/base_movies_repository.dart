@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:movies_app/core/error/failure.dart';
 import 'package:movies_app/movies/domain/entities/movie.dart';
 import 'package:movies_app/movies/domain/entities/movie_detail.dart';
+import 'package:movies_app/movies/domain/usecases/get_movie_details_usecase.dart';
 
 abstract class BaseMoviesRepository {
   //الاشياء او المتطلبات التي نريد ان نعملها في التطبيق
@@ -13,5 +14,7 @@ abstract class BaseMoviesRepository {
   //الحصول على تصنيف الأفلام
   Future<Either<Failure, List<Movie>>> getToRatedMovies();
   //جلب تفاصيل الفلم
-  Future<Either<Failure, MovieDetail>> getMovieDetails();
+  //parameters يستقبل
+  Future<Either<Failure, MovieDetail>> getMovieDetails(
+      MovieDetailsParameters parameters);
 }
