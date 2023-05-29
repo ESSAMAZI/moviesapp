@@ -18,3 +18,7 @@ class ApiConstance {
 }
 
 //api.themoviedb.org/3/movie/now_playing?language=ar-US&page=1&api_key=692c1ff26c74ffbcc95a272c154a11c7
+//Details movies
+//https://api.themoviedb.org/3/movie/385687?language=ar&page=1&api_key=692c1ff26c74ffbcc95a272c154a11c7
+//recommendations الافلام المشابه لها
+//https://api.themoviedb.org/3/movie/385687/recommendations?language=en-US&page=1&api_key=692c1ff26c74ffbcc95a272c154a11c7
