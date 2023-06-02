@@ -5,6 +5,7 @@ import 'package:movies_app/movies/domain/repository/base_movies_repository.dart'
 import 'package:movies_app/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:movies_app/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:movies_app/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:movies_app/movies/domain/usecases/get_recommendation_usecase.dart';
 import 'package:movies_app/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:movies_app/movies/presentation/controller/movie_details_bloc.dart';
 import 'package:movies_app/movies/presentation/controller/movies_bloc.dart';
@@ -18,7 +19,7 @@ class ServicesLocator {
     /// حيث الكائن الجديد يكون مختلف عن السابق واقرب مثال هو
     /// زيارة البروافيل الخاص بصدقيك على الفيس بوك
     sl.registerFactory(() => MoviesBloc(sl(), sl(), sl()));
-    sl.registerFactory(() => MoviesDetailsBloc(sl()));
+    sl.registerFactory(() => MoviesDetailsBloc(sl(), sl()));
 
     /// Use Cases
     sl.registerLazySingleton(
@@ -27,9 +28,12 @@ class ServicesLocator {
         () => GetPopularMoviesUseCase(baseMoviesRepository: sl()));
     sl.registerLazySingleton(
         () => GetTopRatedMoviesUseCase(baseMoviesRepository: sl()));
-
+    //
     sl.registerLazySingleton(
         () => GetMovieDetailsUseCase(baseMoviesRepository: sl()));
+    //
+    sl.registerLazySingleton(
+        () => GetRecommendationUseCase(baseMoviesRepository: sl()));
 
     /// Repository
     sl.registerLazySingleton<BaseMoviesRepository>(
