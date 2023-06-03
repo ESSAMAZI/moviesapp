@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies_app/core/utils/app_String.dart';
 
 class CustomContainerMoviesScreen extends StatelessWidget {
   const CustomContainerMoviesScreen({
@@ -37,7 +38,7 @@ class CustomContainerMoviesScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: const [
-                  Text('See More'),
+                  Text(AppString.seeMore),
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 16.0,

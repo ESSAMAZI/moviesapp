@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/services/services_locator.dart';
+import 'package:movies_app/core/utils/app_String.dart';
 import 'package:movies_app/movies/presentation/Widget/custom_container_movies_screen.dart';
 import 'package:movies_app/movies/presentation/components/now_playing_component.dart';
 import 'package:movies_app/movies/presentation/components/popular_component.dart';
@@ -29,10 +30,11 @@ class MainMoviesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const NowPlayingComponent(),
-              CustomContainerMoviesScreen(textPopular: 'Popular', onTap: () {}),
+              CustomContainerMoviesScreen(
+                  textPopular: AppString.popular, onTap: () {}),
               const PopularComponent(),
               CustomContainerMoviesScreen(
-                  textPopular: 'Top Rated', onTap: () {}),
+                  textPopular: AppString.topRated, onTap: () {}),
               const TopRatedComponent(),
               const SizedBox(height: 50.0),
             ],
